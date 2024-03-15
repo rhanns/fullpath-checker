@@ -18,7 +18,8 @@ receiver_email = "nick@fuseautotech.com"
 smtp_server = "smtp.gmail.com"
 smtp_port = 587
 smtp_username = "nick@fuseautotech.com"
-smtp_password = "nlvk fpzf nkzi aaqn"
+smtp_password = os.getenv("fpchecker")
+
 
 # Function to check if the script is present on the website
 def check_website():
@@ -38,6 +39,7 @@ def check_website():
     finally:
         driver.quit()
 
+
 # Function to send an email notification
 def send_email():
     message = f"Subject: Script Found on {url}\n\nThe script has been added to the website."
@@ -46,6 +48,7 @@ def send_email():
         server.login(smtp_username, smtp_password)
         server.sendmail(sender_email, receiver_email, message)
     print("Email notification sent.")
+
 
 # Main function
 def main():
@@ -56,6 +59,7 @@ def main():
         else:
             print("Script not found. Checking again in 1 hour.")
             time.sleep(3600)  # Wait for 1 hour (3600 seconds)
+
 
 if __name__ == "__main__":
     main()
